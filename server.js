@@ -7,6 +7,10 @@ import cartRouter from './Routes/cart.js'
 import addressRouter from './Routes/address.js'
 import paymentRouter from './Routes/payment.js'
 import cors from 'cors';
+import dotenv from 'dotenv'
+
+dotenv.config()
+
 
 const app = express();
 
@@ -36,12 +40,15 @@ app.use('/api/address', addressRouter)
 // payment Router
 app.use('/api/payment', paymentRouter)
 
-mongoose.connect(
-  "mongodb+srv://anandk27375:Bc37sWeE3U1L9PGX@cluster0.fgfvs.mongodb.net/", {
-  dbName: "MERN_E_Commerce"
-}
-).then(() => console.log("MongoDB Connected Succssfully...!")).catch((err) => console.log(err));
+// mongoose.connect(
+//   "mongodb+srv://anandk27375:Bc37sWeE3U1L9PGX@cluster0.fgfvs.mongodb.net/", {
+//   dbName: "MERN_E_Commerce"
+// }
+// ).then(() => console.log("MongoDB Connected Succssfully...!")).catch((err) => console.log(err));
 
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => console.log("MongoDB Connected Successfully...!"))
+  .catch((err) => console.log(err));
 
 
 const port = 1000;
